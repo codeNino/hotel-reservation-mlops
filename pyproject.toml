@@ -1,0 +1,19 @@
+[project]
+name = "hotel-reservation-ml-srv"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "google-cloud-storage>=3.4.1",
+    "imbalanced-learn>=0.14.0",
+    "lightgbm>=4.6.0",
+    "mlflow>=3.5.1",
+    "pandas>=2.3.3",
+    "python-dotenv>=1.1.1",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.7.2",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.14.5",
+    "xgboost>=3.1.1",
+]
