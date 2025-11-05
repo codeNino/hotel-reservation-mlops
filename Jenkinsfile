@@ -58,15 +58,15 @@ pipeline {
                         gcloud run deploy hotel-reservation-srv \
                             --image=gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest \
                             --platform=managed \
-                            --region africa-south1 \
+                            --region=africa-south1 \
                              --allow-unauthenticated \
-                            --port 8080 \
-                             --memory 1024Mi
+                            --port=8080 \
+                             --memory=1024Mi
 
                         
                         gcloud run services add-iam-policy-binding hotel-reservation-srv \
-            --region africa-south1 \
-            --platform managed \
+            --region=africa-south1 \
+            --platform=managed \
             --member="allUsers" \
               --role="roles/run.invoker" || echo "Binding already exists" 
                             '''
