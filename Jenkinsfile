@@ -58,8 +58,10 @@ pipeline {
                         gcloud run deploy hotel-reservation-srv \
                             --image=gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest \
                             --platform=managed \
-                            --region=us-central1 \
-                            --allow-unauthenticated
+                            --region africa-south1 \
+                             --allow-unauthenticated \
+                            --port 8080 \
+                             --memory 1024Mi
                             '''
                 }
                 }

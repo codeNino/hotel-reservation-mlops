@@ -2,6 +2,7 @@
 FROM python:3.11.13-slim-bookworm AS builder
 
 ENV ENV=production
+ENV PORT=8080
 
 # Install build deps (only for packages needing compilation)
 RUN apt-get update && apt-get install -y --no-install-recommends \
