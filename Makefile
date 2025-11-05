@@ -9,7 +9,7 @@ build:
 run:
 	docker run --rm -it \
 		--name $(CONTAINER_NAME) \
-		-p 8000:8000 \
+		-p 8080:8080 \
 		$(APP_NAME):$(IMAGE_TAG)
 
 stop:
