@@ -64,7 +64,7 @@ pipeline {
                              --memory 1024Mi
 
                         
-                        gcloud run services add-iam-policy-binding ppg-prediction-service \
+                        gcloud run services add-iam-policy-binding hotel-reservation-srv \
             --region africa-south1 \
             --platform managed \
             --member="allUsers" \
