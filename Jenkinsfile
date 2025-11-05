@@ -62,6 +62,13 @@ pipeline {
                              --allow-unauthenticated \
                             --port 8080 \
                              --memory 1024Mi
+
+                        
+                        gcloud run services add-iam-policy-binding ppg-prediction-service \
+            --region africa-south1 \
+            --platform managed \
+            --member="allUsers" \
+              --role="roles/run.invoker" || echo "Binding already exists" 
                             '''
 
                         
