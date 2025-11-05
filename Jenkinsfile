@@ -59,7 +59,7 @@ pipeline {
                             --iamge=gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest \
                             --platform=managed \
                             --region=us-central1 \
-                            --allow=unauthenticated
+                            --allow-unauthenticated
                             '''
                 }
                 }

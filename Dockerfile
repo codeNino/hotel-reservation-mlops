@@ -41,6 +41,6 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy your app
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["uv", "run", "python", "main.py"]
