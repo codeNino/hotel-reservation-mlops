@@ -23,7 +23,6 @@ RUN uv sync --frozen --no-cache --python=/usr/local/bin/python3.11
 FROM python:3.11.13-slim-bookworm AS runtime
 
 ENV ENV=production
-ENV PORT=8080
 
 # Runtime deps only (drop build-essential etc.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
