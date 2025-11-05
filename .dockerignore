@@ -1,0 +1,8 @@
+tests
+notebook
+mlruns
+tutorial_materials
+.venv/
+.env
+README.md
+melvinai-437118-cc719742e8fc.json

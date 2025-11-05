@@ -10,6 +10,6 @@ wheels/
 .venv
 
 .env
-*.json
+melvinai-437118-cc719742e8fc.json
 mlruns/
 tutorial_materials/

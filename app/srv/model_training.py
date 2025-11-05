@@ -1,4 +1,5 @@
 import os
+import json
 import pandas as pd
 import joblib
 from sklearn.model_selection import RandomizedSearchCV
@@ -92,6 +93,20 @@ class ModelTraining:
             raise CustomException("Failed to train lgbm model", e)
         
 
+    def export_feature_list(self, X_test: pd.DataFrame):
+        feature_schema = {
+    col: str(dtype)
+    for col, dtype in X_test.dtypes.items()
+}
+
+# Save both list and schema
+        data = {
+    "features": list(X_test.columns),
+    "schema": feature_schema
+}
+
+        with open(f"{MODEL_DIR}/features.json", "w") as f:
+            json.dump(data, f, indent=4)
     
     def evaluate_model(self, model: BaseEstimator, X_test: pd.DataFrame, y_test: pd.Series):
         try:
@@ -107,6 +122,8 @@ class ModelTraining:
             logger.info(f"Precision Score :: {precision}")
             logger.info(f"Recall Score :: {recall}")
             logger.info(f"F1 Score :: {f1}")
+
+            self.export_feature_list(X_test)
 
             return {
                 "accuracy" : accuracy,
