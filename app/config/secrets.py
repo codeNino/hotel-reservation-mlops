@@ -27,5 +27,5 @@ class Environment(Enum):
 
 class SecretManager:
 
-    PORT : str = os.environ.get("PORT", "8000")
+    PORT : int = int(os.environ.get("PORT", "8000"))
     ENV : Environment = Environment.from_string(os.environ.get("ENV", "local"))
