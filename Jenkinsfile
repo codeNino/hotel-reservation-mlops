@@ -56,7 +56,7 @@ pipeline {
                         gcloud config set project ${GCP_PROJECT}
 
                         gcloud run deploy hotel-reservation-srv \
-                            --iamge=gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest \
+                            --image=gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest \
                             --platform=managed \
                             --region=us-central1 \
                             --allow-unauthenticated
