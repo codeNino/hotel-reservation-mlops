@@ -1,8 +1,6 @@
 # ===== BUILDER STAGE =====
 FROM python:3.11.13-slim-bookworm AS builder
 
-ENV ENV=production
-ENV PORT=8080
 
 # Install build deps (only for packages needing compilation)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -23,6 +21,9 @@ RUN uv sync --frozen --no-cache --python=/usr/local/bin/python3.11
 
 # ===== RUNTIME STAGE =====
 FROM python:3.11.13-slim-bookworm AS runtime
+
+ENV ENV=production
+ENV PORT=8080
 
 # Runtime deps only (drop build-essential etc.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
