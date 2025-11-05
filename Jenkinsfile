@@ -62,6 +62,9 @@ pipeline {
                              --allow-unauthenticated \
                             --port 8080 \
                              --memory 1024Mi
+                            '''
+
+                        
                        
                 }
                 }
