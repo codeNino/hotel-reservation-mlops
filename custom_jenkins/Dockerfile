@@ -15,4 +15,7 @@ RUN apt-get update -y && \
 
 RUN groupadd -f docker && usermod -aG docker jenkins
 
+RUN mkdir -p /var/lib/docker
+VOLUME /var/lib/docker
+
 USER jenkins
