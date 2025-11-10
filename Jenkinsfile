@@ -5,7 +5,7 @@ pipeline {
         VENV_DIR = 'venv'
         GCP_PROJECT = 'melvinai-437118'
         GCLOUD_PATH = '/var/jenkins_home/google-cloud-sdk/bin'
-        UV_PATH= '/var/jenkins_home/.local/bin'
+        UV_PATH = '/var/jenkins_home/.local/bin'
     }
 
     stages {
