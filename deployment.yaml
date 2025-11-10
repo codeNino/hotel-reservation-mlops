@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotel-management-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hotel-management-app
+  template:
+    metadata:
+      labels:
+        app: hotel-management-app
+    spec:
+      containers:
+      - name: hotel-bookings-filter-containers
+        image: gcr.io/melvinai-437118/hotel-reservation-srv:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-bookings-filter-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: hotel-management-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
