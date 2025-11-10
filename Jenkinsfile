@@ -74,8 +74,6 @@ pipeline {
 
                         gcloud auth configure-docker --quiet
 
-                        export DOCKER_BUILDKIT=1
-
                         docker buildx build --platform linux/amd64 -t gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest .
 
                         docker push gcr.io/${GCP_PROJECT}/hotel-reservation-srv:latest
