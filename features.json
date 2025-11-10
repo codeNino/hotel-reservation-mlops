@@ -1,0 +1,26 @@
+{
+    "features": [
+        "lead_time",
+        "no_of_special_requests",
+        "avg_price_per_room",
+        "arrival_month",
+        "arrival_date",
+        "market_segment_type",
+        "no_of_week_nights",
+        "no_of_weekend_nights",
+        "type_of_meal_plan",
+        "room_type_reserved"
+    ],
+    "schema": {
+        "lead_time": "int64",
+        "no_of_special_requests": "int64",
+        "avg_price_per_room": "float64",
+        "arrival_month": "int64",
+        "arrival_date": "int64",
+        "market_segment_type": "int64",
+        "no_of_week_nights": "int64",
+        "no_of_weekend_nights": "int64",
+        "type_of_meal_plan": "int64",
+        "room_type_reserved": "int64"
+    }
+}

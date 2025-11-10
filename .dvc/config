@@ -1,0 +1,4 @@
+[core]
+    remote = gcpremote
+['remote "gcpremote"']
+    url = gs://ragnarlothbucket/mlops-experiments/dvc-bucket/

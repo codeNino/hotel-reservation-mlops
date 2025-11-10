@@ -105,7 +105,7 @@ class ModelTraining:
     "schema": feature_schema
 }
 
-        with open(f"{MODEL_DIR}/features.json", "w") as f:
+        with open(f"{APP_BASE_DIR}/features.json", "w") as f:
             json.dump(data, f, indent=4)
     
     def evaluate_model(self, model: BaseEstimator, X_test: pd.DataFrame, y_test: pd.Series):
