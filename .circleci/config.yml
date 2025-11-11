@@ -97,12 +97,21 @@ jobs:
       - run:
           name: Install DVC and Pull Artifacts
           command: |
-            apt-get update && apt-get install -y python3 python3-pip
-            pip install --no-cache-dir dvc[gdrive,gcs]
+            apt-get update && apt-get install -y curl python3 python3-pip
+            echo "Installing uv..."
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            export PATH="$HOME/.local/bin:$PATH"
+            echo "uv installed at $(which uv)"
 
-            echo "Using credentials from $GOOGLE_APPLICATION_CREDENTIALS"
-            echo "Running dvc pull to fetch model artifacts..."
-            dvc pull
+            # Create and use a virtual environment
+            uv venv $VENV_DIR
+            uv add dvc[gdrive,gcs]
+
+            echo "Authenticating with GCP for DVC..."
+            export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/gcp-key.json
+
+            echo "Pulling DVC artifacts..."
+            uv run dvc pull
 
       - run:
           name: Build and Push Docker Image
