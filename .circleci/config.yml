@@ -1,69 +1,3 @@
-# version: 2.1
-
-# executors:
-#   docker-executor:
-#     docker:
-#       - image: google/cloud-sdk:latest
-#     working_directory: ~/repo
-
-# jobs:
-#   checkout_code:
-#     executor: docker-executor
-#     steps:
-#       - checkout
-
-#   build_docker_image:
-#     executor: docker-executor
-#     steps:
-#       - checkout
-#       - setup_remote_docker
-#       - run:
-#           name: Authenticate with google cloud
-#           command: |
-#               echo "$GCLOUD_SERVICE_KEY" | base64 --decode > gcp-key.json
-#               gcloud auth activate-service-account --key-file=gcp-key.json
-#               gcloud auth configure-docker us-east1-docker.pkg.dev || gcloud auth configure-docker
-
-#       - run:
-#           name: Build and Push image
-#           command: |
-#               docker build -t us-east1-docker.pkg.dev/$GOOGLE_PROJECT_ID/nino-mlops/hotel-reservation-srv:latest .
-#               docker push us-east1-docker.pkg.dev/$GOOGLE_PROJECT_ID/nino-mlops/hotel-reservation-srv:latest
-
-#   deploy_to_gke:
-#     executor: docker-executor
-#     steps:
-#       - checkout
-#       - setup_remote_docker
-#       - run: 
-#           name: Authenticate with google cloud
-#           command: |
-#               echo "$GCLOUD_SERVICE_KEY" | base64 --decode > gcp-key.json
-#               cloud auth activate-service-account --key-file=gcp-key.json
-#               gcloud auth configure-docker us-east1-docker.pkg.dev || gcloud auth configure-docker
-#       - run:
-#           name: Configure GKE
-#           command: |
-#               gcloud container clusters get-credentials $GKE_CLUSTER --zone $GOOGLE_COMPUTE_ZONE --project $GOOGLE_PROJECT_ID
-#       - run:
-#           name: Deploy to GKE
-#           command: |
-#               kubectl apply -f deployment.yaml 
-
-
-# workflows:
-#   version: 2
-#   deploy_pipeline:
-#     jobs:
-#       - checkout_code
-#       - build_docker_image:
-#         requires:
-#           - checkout_code
-#       - deploy_to_gke:
-#           requires:
-#             - build_docker_image
-
-
 version: 2.1
 
 executors:
@@ -85,6 +19,19 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+
+      - run:
+          name: Install Docker CLI
+          command: |
+            apt-get update && apt-get install -y ca-certificates curl gnupg lsb-release
+            mkdir -p /etc/apt/keyrings
+            curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+            echo \
+              "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+              https://download.docker.com/linux/debian \
+              $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+            apt-get update && apt-get install -y docker-ce-cli
+            docker --version
 
       - run:
           name: Authenticate with Google Cloud
