@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hotel-management-app
+  name: nino-mlops
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: hotel-management-app
+      app: nino-mlops
   template:
     metadata:
       labels:
-        app: hotel-management-app
+        app: nino-mlops
     spec:
       containers:
-      - name: hotel-bookings-filter-containers
-        image: gcr.io/melvinai-437118/hotel-reservation-srv:latest
+      - name: nino-mlops
+        image: us-east1-docker.pkg.dev/melvinai-437118/nino-mlops/hotel-reservation-srv:latest
         ports:
         - containerPort: 8080
 ---
@@ -25,7 +25,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: hotel-management-app
+    app: nino-mlops
   ports:
   - protocol: TCP
     port: 80
